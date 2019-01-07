@@ -21,3 +21,27 @@ be translated; e.g., the contents of le test
         7) x = a[i]; a[i] = a[j]; a[j] = x;
         8) }
         9) }
+
+
+On this input, the front end produces
+
+	1) L1:L3: i = i + 1
+	2) L5: t1 = i * 8
+	3) t2 = a [ t1 ]
+	4) if t2 < v goto L3
+	5) L4: j = j - 1
+	6) L7: t3 = j * 8
+	7) t4 = a [ t3 ]
+	8) if t4 > v goto L4
+	9) L6: iffalse i >= j goto L8
+	10) L9: goto L2
+	11) L8: t5 = i * 8
+	12) x = a [ t5 ]
+	13) L10: t6 = i * 8
+	14) t7 = j * 8
+	15) t8 = a [ t7 ]
+	16) a [ t6 ] = t8
+	17) L11: t9 = j * 8
+	18) a [ t9 ] = x
+	19) goto L1
+	20) L2:
