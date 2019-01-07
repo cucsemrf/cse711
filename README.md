@@ -1,11 +1,13 @@
 The code for the packages appears in ve directories: main, lexer, symbol,
 parser, and inter. The commands for creating the compiler vary from system
 to system. The following are from a UNIX implementation:
-        javac lexer/*.java
-        javac symbols/*.java
-        javac inter/*.java
-        javac parser/*.java
-        javac main/*.java
+
+        `javac lexer/*.java`
+        `javac symbols/*.java`
+        `javac inter/*.java`
+        `javac parser/*.java`
+        `javac main/*.java`
+	
 The javac command creates .class les for each class. The translator can
 then be exercised by typing java main.Main followed by the source program to
 be translated; e.g., the contents of le test
