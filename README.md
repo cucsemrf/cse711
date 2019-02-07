@@ -25,7 +25,7 @@ func_decl -> def  id ( func_decl_args ) :  id => block   | (func_decl_args) :  i
 	 
 func_decl_args :  epsilon  | var_decl    | func_decl_args , var_decl  
 
-expr ->  id TEQUAL expr   |  id ( call_args )  | (call_args )   |  id  | expr % expr   | expr * expr  
+expr ->  id = expr   |  id ( call_args )  | (call_args )   |  id  | expr % expr   | expr * expr  
      | expr / expr   | expr +  expr   |  expr comparison expr   | expr - expr   | ( expr )   | numeric 
 
 numeric -> int | double  
