@@ -1,5 +1,4 @@
-
-# UCaml (uhh-KAM-əl)) 
+ # UCaml (uhh-KAM-əl)) 
 ####      - a strictly typed static functional programming language. 
 
 A baby programming language for learning principles and theories on undergrad/grad level Computer Science courses on Compilers and Priciples of Programming Languages. The compiler for the uCAML is implemented using FLEX, BISON and LLVM.
@@ -188,5 +187,3 @@ Code was run.
 make (in src dir)
 ./parser.out < ../examples/loop.txt
 ```
-
- 
