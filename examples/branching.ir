@@ -1,0 +1,198 @@
+; ModuleID = 'main'
+source_filename = "main"
+
+@.str = private constant [4 x i8] c"%d\0A\00"
+
+declare i32 @printf(i8*, ...)
+
+define internal void @echo(i64 %toPrint) {
+entry:
+  %0 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str, i32 0, i32 0), i64 %toPrint)
+  ret void
+}
+
+define internal void @main() {
+entry:
+  %0 = call i64 @baz(i64 14, i64 21)
+  %1 = call i64 @printi(i64 %0)
+  ret void
+}
+
+declare i64 @printi(i64)
+
+define internal i64 @foo(i64 %i1) {
+entry:
+  %i = alloca i64, addrspace(1)
+  store i64 %i1, i64 addrspace(1)* %i
+  %0 = load i64, i64 addrspace(1)* %i
+  %1 = call i64 @printi(i64 %0)
+  ret i64 0
+}
+
+define internal i64 @bar(i64 %i1) {
+entry:
+  %i = alloca i64, addrspace(1)
+  store i64 %i1, i64 addrspace(1)* %i
+  %0 = load i64, i64 addrspace(1)* %i
+  %1 = call i64 @printi(i64 %0)
+  ret i64 1
+}
+
+define internal i64 @baz(i64 %x1, i64 %y2) {
+entry:
+  %x = alloca i64, addrspace(1)
+  store i64 %x1, i64 addrspace(1)* %x
+  %y = alloca i64, addrspace(1)
+  store i64 %y2, i64 addrspace(1)* %y
+  %0 = load i64, i64 addrspace(1)* %x
+  %1 = load i64, i64 addrspace(1)* %y
+  %2 = icmp ult i64 %0, %1
+  %3 = icmp ne i1 %2, false
+  %4 = icmp ne i1 %3, false
+  br i1 %4, label %then, label %else
+
+then:                                             ; preds = %entry
+  %5 = load i64, i64 addrspace(1)* %x
+  %6 = call i64 @foo(i64 %5)
+  br label %ifcont
+
+else:                                             ; preds = %entry
+  %7 = load i64, i64 addrspace(1)* %y
+  %8 = call i64 @bar(i64 %7)
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then
+  %iftmp = phi i64 [ %6, %then ], [ %8, %else ]
+  ret i64 0
+}
+Running code...
+14
+0
+Code was run.
+MacBookAir:src rufaruqui$ ./parser.out < ../examples/branching.txt
+0x7f94c8d03020
+Generating code...
+Generating code for P10NStatement
+Generating code for P10NStatement
+Argument__int
+Creating variable declaration int i
+Generating code for P10NStatement
+Generating code for 11NMethodCall
+Creating identifier reference: i
+Creating method call: printi
+Generating code for P10NStatement
+Generating return code for 8NInteger
+Creating integer: 0
+Creating block
+Creating function: foo
+Generating code for P10NStatement
+Argument__int
+Creating variable declaration int i
+Generating code for P10NStatement
+Generating code for 11NMethodCall
+Creating identifier reference: i
+Creating method call: printi
+Generating code for P10NStatement
+Generating return code for 8NInteger
+Creating integer: 1
+Creating block
+Creating function: bar
+Generating code for P10NStatement
+Argument__intint
+Creating variable declaration int x
+Creating variable declaration int y
+Generating code for P10NStatement
+Creating binary operation 263
+Creating identifier reference: x
+Creating identifier reference: y
+Generating code for P10NStatement
+Generating code for 11NMethodCall
+Creating identifier reference: x
+Creating method call: foo
+Creating block
+Generating code for P10NStatement
+Generating code for 11NMethodCall
+Creating identifier reference: y
+Creating method call: bar
+Creating block
+Generating code for P10NStatement
+Generating return code for 8NInteger
+Creating integer: 0
+Creating block
+Creating function: baz
+Generating code for P10NStatement
+Generating code for 11NMethodCall
+Creating integer: 14
+Creating integer: 21
+Creating method call: baz
+Creating block
+Code is generated.
+; ModuleID = 'main'
+source_filename = "main"
+
+@.str = private constant [4 x i8] c"%d\0A\00"
+
+declare i32 @printf(i8*, ...)
+
+define internal void @echo(i64 %toPrint) {
+entry:
+  %0 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str, i32 0, i32 0), i64 %toPrint)
+  ret void
+}
+
+define internal void @main() {
+entry:
+  %0 = call i64 @baz(i64 14, i64 21)
+  ret void
+}
+
+declare i64 @printi(i64)
+
+define internal i64 @foo(i64 %i1) {
+entry:
+  %i = alloca i64, addrspace(1)
+  store i64 %i1, i64 addrspace(1)* %i
+  %0 = load i64, i64 addrspace(1)* %i
+  %1 = call i64 @printi(i64 %0)
+  ret i64 0
+}
+
+define internal i64 @bar(i64 %i1) {
+entry:
+  %i = alloca i64, addrspace(1)
+  store i64 %i1, i64 addrspace(1)* %i
+  %0 = load i64, i64 addrspace(1)* %i
+  %1 = call i64 @printi(i64 %0)
+  ret i64 1
+}
+
+define internal i64 @baz(i64 %x1, i64 %y2) {
+entry:
+  %x = alloca i64, addrspace(1)
+  store i64 %x1, i64 addrspace(1)* %x
+  %y = alloca i64, addrspace(1)
+  store i64 %y2, i64 addrspace(1)* %y
+  %0 = load i64, i64 addrspace(1)* %x
+  %1 = load i64, i64 addrspace(1)* %y
+  %2 = icmp ult i64 %0, %1
+  %3 = icmp ne i1 %2, false
+  %4 = icmp ne i1 %3, false
+  br i1 %4, label %then, label %else
+
+then:                                             ; preds = %entry
+  %5 = load i64, i64 addrspace(1)* %x
+  %6 = call i64 @foo(i64 %5)
+  br label %ifcont
+
+else:                                             ; preds = %entry
+  %7 = load i64, i64 addrspace(1)* %y
+  %8 = call i64 @bar(i64 %7)
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then
+  %iftmp = phi i64 [ %6, %then ], [ %8, %else ]
+  ret i64 0
+}
+Running code...
+14
+Code was run.

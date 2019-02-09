@@ -1,0 +1,17 @@
+def gcd(x:int, y:int): int => {
+   if(y == 0) 
+      {  
+        echo(x)
+        return x
+      }
+   else   
+      {   
+          gcd(y, x%y)  
+      }
+   
+   return 0
+} 
+
+gcd(14, 21)
+gcd(4,3)
+gcd(225, 115)

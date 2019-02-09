@@ -1,0 +1,58 @@
+; ModuleID = 'main'
+source_filename = "main"
+
+@.str = private constant [4 x i8] c"%d\0A\00"
+
+declare i32 @printf(i8*, ...)
+
+define internal void @echo(i64 %toPrint) {
+entry:
+  %0 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str, i32 0, i32 0), i64 %toPrint)
+  ret void
+}
+
+define internal void @main() {
+entry:
+  call void @printstart(i64 4)
+  ret void
+}
+
+declare i64 @printi(i64)
+
+define internal void @printstart(i64 %n1) {
+entry:
+  %n = alloca i64, addrspace(1)
+  store i64 %n1, i64 addrspace(1)* %n
+  %p = alloca i64, addrspace(1)
+  store i64 1, i64 addrspace(1)* %p
+  %i = alloca i64, addrspace(1)
+  store i64 1, i64 addrspace(1)* %i
+  br label %loop
+
+loop:                                             ; preds = %loop, %entry
+  %i2 = phi i64 [ 1, %entry ], [ %nextvar, %loop ]
+  %0 = load i64, i64 addrspace(1)* %p
+  call void @echo(i64 %0)
+  %1 = load i64, i64 addrspace(1)* %p
+  %2 = add i64 %1, 1
+  store i64 %2, i64 addrspace(1)* %p
+  %nextvar = add i64 %i2, 2
+  %loopcond = icmp ule i64 %nextvar, 20
+  %tmpbool = icmp ne i1 %loopcond, false
+  br i1 %tmpbool, label %loop, label %afterloop
+
+afterloop:                                        ; preds = %loop
+  ret void
+}
+Running code...
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Code was run.
