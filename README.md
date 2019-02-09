@@ -2,7 +2,7 @@
 # uCML (uhh-KaM-əl)) 
 ####      - a strictly typed static functional programming language. 
 
-A baby programming language for learning principles and theories on undergrad/grad level Computer Science courses on Compilers and Priciples of Programming Languages. The compiler for the uCAML is implemented using FLEX, BISON and LLVM.
+A baby programming language for learning principles and theories of undergrad/grad level Computer Science courses on Compilers and Priciples of Programming Languages. The compiler for the uCAML is implemented using FLEX, BISON and LLVM.
 
 ### CFG
 ```
@@ -82,7 +82,7 @@ echo(comparison_test(10,10))
 ```
 
 ## If-else Branching
-   if(expressionn) { statements } else {statements}
+   if(expression) { statements } else {statements}
 ```
 if(x > y) 
       { foo(x)}
