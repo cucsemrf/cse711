@@ -1,4 +1,5 @@
- # UCaml (uhh-KAM-əl)) 
+
+# uCML (uhh-KaM-əl)) 
 ####      - a strictly typed static functional programming language. 
 
 A baby programming language for learning principles and theories on undergrad/grad level Computer Science courses on Compilers and Priciples of Programming Languages. The compiler for the uCAML is implemented using FLEX, BISON and LLVM.
@@ -10,7 +11,7 @@ program -> stmts
 stmts   -> stmt  | stmts stmt;
 
 stmt    -> var_decl | func_decl | extern_decl  | expr   
-        | if ( expr ) block  | if ( expr ) block else block  
+        | if ( expr ) block  | if ( expr ) block else block 
         | for (  id :  id in expr to expr ) block  | for (  id :  id in expr to expr by expr ) block  
         | return expr  
         
@@ -31,7 +32,7 @@ numeric -> int | double
 
 call_args  -> epsilon  | expr   | call_args , expr    
 
-comparison -> TCEQ | TCNE | TCLT | TCLE | TCGT | TCGE
+comparison -> == | != | < | <= | > | >=
 ```
 
 ### Sample Codes
@@ -42,7 +43,11 @@ comparison -> TCEQ | TCNE | TCLT | TCLE | TCGT | TCGE
  x:int 
  y:double = 1.0
 ```
+#### Single Statement
 
+```
+ x:int = a * 5 + 5 / 5 + (100 * 7)
+```
 ### Function Declartion
 
 ```
@@ -76,6 +81,102 @@ def comparison_test(x: int, y: int): int => {
 echo(comparison_test(10,10)) 
 ```
 
+## If-else Branching
+   if(expressionn) { statements } else {statements}
+```
+if(x > y) 
+      { foo(x)}
+   else   
+      { bar(y) }
+    
+```
+## For Loop 
+    for( identifier in start to end [by step]) { statements}
+
+```
+ p:int = 1
+for(i:int in 1 to n) {   
+    echo(p) 
+    p = p +1
+ }
+```
+
+```
+ p:int = 1
+for(i:int in 1 to n by 2) {   
+    echo(p) 
+    p = p +1
+ }
+```
+### Sample Output from some fragments of uCML
+
+```
+ extern  printi(val:int):void   
+
+x:int
+x = 5+6-5/5+9
+echo(x)
+
+def do_math(a: int) : int => { 
+    x:int = a * 5 + 5 / 5 + (100 * 7)
+    return x
+}
+
+echo(do_math(do_math(10)))
+echo(do_math(10))
+
+
+def square(x: int):int =>  { return x * x }
+
+def sumOfSquares(x: int, y: int):int => {
+   return square(x) + square(y)
+}
+echo(sumOfSquares(4,5)) 
+
+
+
+(x: int, y:int, z:double):int => { return x * y * z }
+
+ echo((4,5,6.0) + (3,5,4.0))
+
+
+
+def comparison_test(x: int, y: int): int => { 
+     printi( x == y)
+     printi( x != y)
+     printi( x >= y)
+     printi( x <= y)
+     printi( x > y)
+     printi( x < y)
+     return x < y
+}
+
+
+echo(comparison_test(10,10)) 
+
+
+def f(): int =>{
+      x:int  = 10
+     return x
+ }
+ ```
+### Output in a target machine (OS X)
+```
+Running code...
+19
+4456
+751
+41
+0
+1
+0
+1
+1
+0
+0
+0
+Code was run.
+```
 
 ### Loop Test
 ```
@@ -187,3 +288,5 @@ Code was run.
 make (in src dir)
 ./parser.out < ../examples/loop.txt
 ```
+
+ 
