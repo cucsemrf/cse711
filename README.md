@@ -39,13 +39,13 @@ comparison -> == | != | < | <= | > | >=
 
 
 #### Variable Declaration 
-```
+```python
  x:int 
  y:double = 1.0
 ```
 #### Single Statement
 
-```
+```python
  x:int = a * 5 + 5 / 5 + (100 * 7)
 ```
 ### Function Declartion
@@ -59,14 +59,14 @@ echo(sumOfSquares(4,5))
 ```
 ### Anonymous Function Declaration
 
-```
+```python
 (x: int, y:int, z:double):int => { return x * y * z }
 
  echo((4,5,6.0) + (3,5,4.0))
 ```
 
 ### Logical Operators
-```
+```python
 def comparison_test(x: int, y: int): int => { 
      printi( x == y)
      printi( x != y)
@@ -83,13 +83,13 @@ echo(comparison_test(10,10))
 
 ## If-else Branching
    if(expression) { statements } else {statements}
-```
+```python
 if(x > y) 
-      { foo(x)}
-   else   
-      { bar(y) }
+     { foo(x)}
+else   
+     { bar(y) }
     
-```
+```python
 ## For Loop 
     for( identifier in start to end [by step]) { statements}
 
@@ -101,7 +101,7 @@ for(i:int in 1 to n) {
  }
 ```
 
-```
+```python
  p:int = 1
 for(i:int in 1 to n by 2) {   
     echo(p) 
@@ -110,7 +110,7 @@ for(i:int in 1 to n by 2) {
 ```
 ### Sample Output from some fragments of uCML
 
-```
+```python
  extern  printi(val:int):void   
 
 x:int
@@ -179,7 +179,7 @@ Code was run.
 ```
 
 ### Loop Test
-```
+```python
  extern  printi(val:int):int   
  
 def printstart(n:int): void => { 
@@ -195,7 +195,7 @@ printstart(4)
 ```
 ### IR for the loop 
 
-```
+```asm
  define internal void @printstart(i64 %n1) {
 entry:
   %n = alloca i64, addrspace(1)
@@ -232,7 +232,7 @@ Code was run.
 
 ### IF-ELSE branching
 
-```
+```python
 extern  printi(val:int):int   
  
  def foo(i:int): int => { printi(i) return 0}
@@ -251,7 +251,7 @@ baz(30,10)
 ```
 ### IR for the if-else branch (only baz function)
 
-```
+```asm
   define internal i64 @baz(i64 %x1, i64 %y2) {
 entry:
   %x = alloca i64, addrspace(1)
